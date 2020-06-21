@@ -1,3 +1,19 @@
+<% flash.each do |type, msg| %>
+  <h2 style="color:red"><%= msg %></h2>
+<% end %>
+<% if @post %>
+  <% if @post.errors.any? %>
+  <h2>
+    <%= pluralize(@post.errors.count, "error") %> were found
+  </h2>
+  <ul style="color:red">
+    <% @post.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+  <% end %>
+<% end %>
+<br>
 <h2>Editing "<%= @post.title %>"</h2>
 <%= form_tag post_path(@post), method: "patch" do %>
   <div class="field">
