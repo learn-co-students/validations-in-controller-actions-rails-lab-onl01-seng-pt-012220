@@ -8,9 +8,13 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post.update(post_params)
-
-    redirect_to post_path(@post)
+    if @post.update(post_params)
+      redirect_to post_path(@post)
+    else
+      flash.now[:error] = "Unable to update this post. Please fix the following mistakes"
+      render :edit
+    end
+    
   end
 
   private

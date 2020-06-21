@@ -1,3 +1,19 @@
+<% flash.each do |type, msg| %>
+  <h2 style="color:red"><%= msg %></h2>
+<% end %>
+<% if @author %>
+  <% if @author.errors.any? %>
+  <h2>
+    <%= pluralize(@author.errors.count, "error") %> were found
+  </h2>
+  <ul style="color:red">
+    <% @author.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+  <% end %>
+<% end %>
+
 <h2>Create an Author</h2>
 <%= form_tag authors_path, method: "post" do %>
   <div class="field">
